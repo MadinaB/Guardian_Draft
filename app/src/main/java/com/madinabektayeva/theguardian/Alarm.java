@@ -37,8 +37,8 @@ public class Alarm extends AppCompatActivity implements
         prefs = getSharedPreferences("TheGuardianData", MODE_PRIVATE);
         alarm = prefs.getString("alarm", (prefs.getString("name", "user")+" is in danger. Police was informed. "));
 
-        unmuteAudio();
         increaseAlarm();
+        unmuteAudio();
         speakOut();
 
         yes_button.setOnClickListener(new View.OnClickListener() {
@@ -61,8 +61,8 @@ public class Alarm extends AppCompatActivity implements
     }
     private void increaseAlarm(){
         int i =0;
-        while(i<100){
-            alarm+="! ";
+        while(i<4){
+            alarm+=" ";
             alarm+=alarm;
             i++;
         }

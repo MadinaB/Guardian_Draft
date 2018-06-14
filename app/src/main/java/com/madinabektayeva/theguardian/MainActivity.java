@@ -592,7 +592,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private int currentStepCount = 0;
     private int lastStepCount = 0;
     private int initialStepCount = -1;
-    private int stepDistance = 15;
+    private int stepDistance = 12;
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
