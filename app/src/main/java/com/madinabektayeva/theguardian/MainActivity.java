@@ -1,17 +1,27 @@
 package com.madinabektayeva.theguardian;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.hardware.*;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import java.util.Calendar;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+import static android.hardware.SensorManager.SENSOR_DELAY_UI;
+
+public class MainActivity extends AppCompatActivity implements SensorEventListener {
+
+    private Calendar lastDate;
+    private Calendar currentDate;
 
     private Button settings;
     private Button user_info;
@@ -35,6 +45,12 @@ public class MainActivity extends AppCompatActivity {
     private String description2;
     private String mail2;
 
+    private int currentStepCount;
+    private int lastStepCount;
+    private int initialStepCount;
+    private int stepDistance;
+
+
     private SharedPreferences prefs;
 
     private boolean location_pressed;
@@ -42,6 +58,10 @@ public class MainActivity extends AppCompatActivity {
     private boolean mic_pressed;
     private boolean call_pressed;
     private boolean alarm_pressed;
+    private boolean speechReconitionOn;
+
+    private SensorManager sensorManager;
+    private Sensor stepCountSensor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +69,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        speechReconitionOn = false;
+
         mailLogin = "theGuardianInforms@gmail.com";
         mailPass = "dummyPass";
+
+        currentStepCount = 0;
+        lastStepCount = 0;
+        initialStepCount = -1;
+        stepDistance = 15;
+
 
         settings = (Button) findViewById(R.id.settings);
         user_info = (Button) findViewById(R.id.user_info);
@@ -60,6 +88,9 @@ public class MainActivity extends AppCompatActivity {
         mic = (Button) findViewById(R.id.mic);
         call = (Button) findViewById(R.id.call);
         alarm = (Button) findViewById(R.id.onoff);
+
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        stepCountSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
 
         prefs = getSharedPreferences("TheGuardianData", MODE_PRIVATE);
 
@@ -242,7 +273,7 @@ public class MainActivity extends AppCompatActivity {
         mail2 = prefs.getString("mail2", "");
     }
 
-    private boolean requestCall(){
+    private boolean requestCall() {
 
         StringBuilder subject = new StringBuilder();
         StringBuilder message = new StringBuilder();
@@ -266,17 +297,17 @@ public class MainActivity extends AppCompatActivity {
         recipients.add(mail1);
         recipients.add(mail2);
 
-        Log.d("mail1","_"+mail1+"_");
-        Log.d("mail1", "_"+mail2+"_");
-        Log.d("mailLogin","_"+mailLogin+"_");
-        Log.d("mailPass", "_"+mailPass+"_");
+        Log.d("mail1", "_" + mail1 + "_");
+        Log.d("mail1", "_" + mail2 + "_");
+        Log.d("mailLogin", "_" + mailLogin + "_");
+        Log.d("mailPass", "_" + mailPass + "_");
 
         sendMessage(mailLogin, mailPass, subject.toString(), message.toString(), recipients);
 
         return true;
     }
 
-    private static boolean sendMessage(String from, String pass, String subject, String message, ArrayList<String> recipients){
+    private static boolean sendMessage(String from, String pass, String subject, String message, ArrayList<String> recipients) {
         Mail mailService = new Mail();
         String[] to = recipients.toArray(new String[recipients.size()]);
         mailService.sendFromGMail(from, pass, to, subject, message);
@@ -284,4 +315,61 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (stepCountSensor != null) {
+            sensorManager.registerListener((SensorEventListener) this, stepCountSensor, SensorManager.SENSOR_DELAY_UI);
+        } else {
+            Toast.makeText(this, "Sensor not found", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    protected void onPause() {
+        super.onPause();
+        sensorManager.unregisterListener((SensorListener) this);
+    }
+
+    public void onSensorChanged(SensorEvent sensorEvent) {
+
+        int timepassed;
+
+        currentDate = Calendar.getInstance();
+
+        if (lastDate == null) {
+            lastDate = currentDate;
+        }
+
+        if (sensorEvent.sensor.getType() == Sensor.TYPE_STEP_COUNTER) {
+            currentStepCount = (int) sensorEvent.values[0];
+        }
+
+        timepassed = (int) ((lastDate.getTimeInMillis() - currentDate.getTimeInMillis()) / (1000 * 60) % 60);
+
+        if (timepassed < 3) {
+            if (currentStepCount > lastStepCount + stepDistance) {
+                if (!speechReconitionOn) {
+                    speechReconitionOn = true;
+                    //  recognizespeech
+                    lastDate = currentDate;
+                    lastStepCount = currentStepCount;
+                    Log.v(" ", "Speech recognition start");
+                } else {
+                    //hamdle gps update
+                }
+            }
+        } else {
+            lastDate = currentDate;
+            lastStepCount = currentStepCount;
+        }
+    }
+
+    public void onAccuracyChanged(Sensor sensor, int i) {
+
+    }
 }
+
+
+// https://maps.google.com/?q=<lat>,<lng>
+//https://www.google.com/maps/?q=-15.623037,18.388672

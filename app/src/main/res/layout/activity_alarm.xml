@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:paddingTop="0dp"
+    android:paddingBottom="0dp"
+    android:paddingRight="0dp"
+    android:paddingLeft="0dp"
+    tools:context="com.madinabektayeva.theguardian.Alarm">
+
+
+    <RelativeLayout
+        android:layout_width="250dp"
+        android:layout_height="150dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/question"
+            />
+
+        <Button
+            android:id="@+id/yes_button"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom= "40dp"
+            android:layout_marginLeft= "40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/yes_button"
+            />
+
+        <Button
+            android:id="@+id/no_button"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom= "40dp"
+            android:layout_marginRight= "40dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/no_button"
+            />
+
+    </RelativeLayout>
+
+
+
+
+
+</RelativeLayout>
