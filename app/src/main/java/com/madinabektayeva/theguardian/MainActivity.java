@@ -5,8 +5,11 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mailLogin = "theGuardianInforms@gmail.com";
+        mailPass = "dummyPass";
 
         settings = (Button) findViewById(R.id.settings);
         user_info = (Button) findViewById(R.id.user_info);
@@ -152,6 +158,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 call_pressed = (!call_pressed);
                 if (call_pressed) {
+                    requestCall();
                     call.setBackgroundResource(R.drawable.call_button_yellow);
                     (new Handler()).postDelayed(new Runnable() {
                         public void run() {
@@ -234,4 +241,47 @@ public class MainActivity extends AppCompatActivity {
     private void updateMail2() {
         mail2 = prefs.getString("mail2", "");
     }
+
+    private boolean requestCall(){
+
+        StringBuilder subject = new StringBuilder();
+        StringBuilder message = new StringBuilder();
+
+        ArrayList<String> recipients = new ArrayList<>();
+
+        subject.append("Notice from TheGuardian: Call request from ");
+        subject.append(name);
+        subject.append(" ");
+        subject.append(surname);
+
+        message.append("Following user asks you to call them right now: \n");
+        message.append(name);
+        message.append(" ");
+        message.append(surname);
+        message.append(". \n");
+        message.append("Phone: ");
+        message.append(phone);
+        message.append(". \n");
+
+        recipients.add(mail1);
+        recipients.add(mail2);
+
+        Log.d("mail1","_"+mail1+"_");
+        Log.d("mail1", "_"+mail2+"_");
+        Log.d("mailLogin","_"+mailLogin+"_");
+        Log.d("mailPass", "_"+mailPass+"_");
+
+        sendMessage(mailLogin, mailPass, subject.toString(), message.toString(), recipients);
+
+        return true;
+    }
+
+    private static boolean sendMessage(String from, String pass, String subject, String message, ArrayList<String> recipients){
+        Mail mailService = new Mail();
+        String[] to = recipients.toArray(new String[recipients.size()]);
+        mailService.sendFromGMail(from, pass, to, subject, message);
+        return true;
+
+    }
+
 }

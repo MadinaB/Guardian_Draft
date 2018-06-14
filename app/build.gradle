@@ -19,6 +19,8 @@ android {
     }
 }
 
+
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -27,5 +29,24 @@ dependencies {
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
-    compile files('libs/javax.mail.jar')
+}
+
+
+
+android {
+    packagingOptions {
+        pickFirst 'META-INF/LICENSE.txt' // picks the JavaMail license file
+    }
+}
+
+repositories {
+    jcenter()
+    maven {
+        url "https://maven.java.net/content/groups/public/"
+    }
+}
+
+dependencies {
+    compile 'com.sun.mail:android-mail:1.5.5'
+    compile 'com.sun.mail:android-activation:1.5.5'
 }
