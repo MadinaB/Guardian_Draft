@@ -575,7 +575,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         super.onResume();
         if (stepCountSensor != null) {
             sensorManager.registerListener((SensorEventListener) this, stepCountSensor, SensorManager.SENSOR_DELAY_UI);
-            Toast.makeText(this, "works", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, "Sensor not found", Toast.LENGTH_SHORT).show();
         }
@@ -618,8 +617,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         if (timepassed < 3) {
             if (currentStepCount > lastStepCount + stepDistance) {
-                Toast.makeText(this, "timepassed " + timepassed + "'/n' currentStepCount " + currentStepCount + ". lastStepCount  " + lastStepCount, Toast.LENGTH_SHORT).show();
-                if (!speechReconitionOn) {
+               if (!speechReconitionOn) {
                     lastDate = currentDate;
                     lastStepCount = currentStepCount;
                     Log.v(" ", "Speech recognition start");
