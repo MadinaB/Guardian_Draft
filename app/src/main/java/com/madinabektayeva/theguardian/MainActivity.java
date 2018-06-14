@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private Sensor stepCountSensor;
 
     private SharedPreferences prefs;
+    private SharedPreferences.Editor editor;
 
     private boolean location_pressed;
     private boolean contact_pressed;
@@ -116,6 +117,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         stepCountSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
 
         prefs = getSharedPreferences("TheGuardianData", MODE_PRIVATE);
+        editor = getSharedPreferences("TheGuardianData", MODE_PRIVATE).edit();
 
         location_pressed = false;
         contact_pressed = false;
@@ -179,7 +181,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                         public void run() {
                             if (location_pressed) {
                                 location.setBackgroundResource(R.drawable.location_button_white);
-                                sendMsg(locationMessage(), locationSubject(), mail1, mail1);// TODO locationMessage()
+                                sendMsg(locationMessage(), locationSubject(), mail1, mail2);// TODO locationMessage()
                                 returnedText.setText("Location message was sent");
                                 (new Handler()).postDelayed(new Runnable() {
                                     public void run() {
@@ -204,7 +206,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                     (new Handler()).postDelayed(new Runnable() {
                         public void run() {
                             if (contact_pressed) {
-                                sendMsg(contactMessage(), contactSubject(), mail1, mail1);// TODO contatcmessage
+                                sendMsg(contactMessage(), contactSubject(), mail2, mail2);// TODO contatcmessage
                                 contact.setBackgroundResource(R.drawable.contact_button_white);
                                 returnedText.setText("Request for contact was sent");
                                 (new Handler()).postDelayed(new Runnable() {
@@ -247,7 +249,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                     (new Handler()).postDelayed(new Runnable() {
                         public void run() {
                             if (call_pressed) {
-                                sendMsg(callMessage(), callSubject(),  mail1, mail1);
+                                sendMsg(callMessage(), callSubject(),  mail2, mail2);
                                 call.setBackgroundResource(R.drawable.call_button_white);
                                 returnedText.setText("Call was requested");
                                 (new Handler()).postDelayed(new Runnable() {
@@ -273,7 +275,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                     (new Handler()).postDelayed(new Runnable() {
                         public void run() {
                             if (alarm_pressed) {
-                                sendMsg(alarmMessage(), alarmSubject(), mail1, mail1);
+                                sendMsg(alarmMessage(), alarmSubject(), mail1, mail2);
                                 openAlarmActivity();
                                 alarm.setBackgroundResource(R.drawable.onoff_button_white);
                                 returnedText.setText("Alarm situation");
@@ -281,11 +283,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                                     public void run() {
                                         returnedText.setText(" ");
                                     }
-                                }, 3000);
+                                }, 1000);
                             }
 
                         }
-                    }, 3000);
+                    }, 1000);
                 } else {
                     alarm.setBackgroundResource(R.drawable.onoff_button_white);
                 }
@@ -812,6 +814,25 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         isAudioMuted = false;
     }
 
+    private void updateAlarm1(){
+        StringBuilder alarm = new StringBuilder();
+        alarm.append(name);
+        alarm.append(" is in danger");
+        alarm.append(command1);
+        alarm.append(" was recored");
+        alarm.append(" Police was informed ");
+        editor.putString("alarm", alarm.toString());
+    }
+
+    private void updateAlarm2(){
+        StringBuilder alarm = new StringBuilder();
+        alarm.append(name);
+        alarm.append(" needs help");
+        alarm.append(command2);
+        alarm.append(" was recored. ");
+        alarm.append(" Relatives were informed ");
+        editor.putString("alarm", alarm.toString());
+    }
 
 
 
