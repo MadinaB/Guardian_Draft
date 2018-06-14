@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context="com.madinabektayeva.theguardian.Settings">
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background"
+        android:orientation="vertical"
+        android:paddingBottom="20dp"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        android:paddingTop="95dp">
+
+        <TextView
+            android:id="@+id/command1TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:paddingBottom="5dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="50dp"
+            android:paddingTop="5dp"
+            android:text="Command #1" />
+
+        <EditText
+            android:id="@+id/command1EditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input"
+            android:textColor="@color/colorAccent"
+            android:padding="10dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text=" " />
+
+        <TextView
+            android:id="@+id/description1TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:paddingBottom="5dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="50dp"
+            android:paddingTop="5dp"
+            android:text="Description" />
+
+        <EditText
+            android:id="@+id/description1EditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input"
+            android:textColor="@color/colorAccent"
+            android:padding="10dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text=" " />
+
+        <TextView
+            android:id="@+id/mail1TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:paddingBottom="5dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="50dp"
+            android:paddingTop="5dp"
+            android:text="Email Address" />
+
+        <EditText
+            android:id="@+id/mail1EditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input"
+            android:textColor="@color/colorAccent"
+            android:padding="10dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text=" " />
+
+        <TextView
+            android:id="@+id/command2TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:paddingBottom="5dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="50dp"
+            android:paddingTop="5dp"
+            android:text="Command #2" />
+
+        <EditText
+            android:id="@+id/command2EditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input"
+            android:textColor="@color/colorAccent"
+            android:padding="10dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text=" " />
+
+        <TextView
+            android:id="@+id/description2TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:paddingBottom="5dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="50dp"
+            android:paddingTop="5dp"
+            android:text="Description" />
+
+        <EditText
+            android:id="@+id/description2EditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input"
+            android:textColor="@color/colorAccent"
+            android:padding="10dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text=" " />
+
+        <TextView
+            android:id="@+id/mail2TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:paddingBottom="5dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="50dp"
+            android:paddingTop="5dp"
+            android:text="Email Address" />
+
+        <EditText
+            android:id="@+id/mail2EditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input"
+            android:textColor="@color/colorAccent"
+            android:padding="10dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text=" " />
+
+        <Button
+            android:id="@+id/saveButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/input"
+            android:paddingTop="5dp"
+            android:text="Save"
+            android:textColor="@color/colorAccent" />
+
+    </LinearLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

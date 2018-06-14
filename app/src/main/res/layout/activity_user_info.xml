@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context="com.madinabektayeva.theguardian.UserInfo">
+
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background"
+        android:paddingTop="95dp"
+        android:paddingBottom="20dp"
+        android:paddingRight="50dp"
+        android:paddingLeft="50dp"
+        android:orientation="vertical"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <TextView
+            android:id="@+id/nameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingRight="50dp"
+            android:paddingLeft="30dp"
+            android:layout_centerHorizontal="true"
+            android:text="Name" />
+
+        <EditText
+            android:id="@+id/nameEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input"
+            android:textColor="@color/colorAccent"
+            android:padding="10dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text=" " />
+
+        <TextView
+            android:id="@+id/surnameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingRight="50dp"
+            android:paddingLeft="30dp"
+            android:layout_centerHorizontal="true"
+            android:text="Surname" />
+
+        <EditText
+            android:id="@+id/surnameEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input"
+            android:textColor="@color/colorAccent"
+            android:padding="10dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text=" " />
+
+        <TextView
+            android:id="@+id/phoneTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingRight="50dp"
+            android:paddingLeft="30dp"
+            android:layout_centerHorizontal="true"
+            android:text="Phone" />
+
+        <EditText
+            android:id="@+id/phoneEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input"
+            android:textColor="@color/colorAccent"
+            android:padding="10dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text=" " />
+
+        <Button
+            android:id="@+id/saveButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/input"
+            android:paddingTop="5dp"
+            android:text="Save"
+            android:textColor="@color/colorAccent" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>
