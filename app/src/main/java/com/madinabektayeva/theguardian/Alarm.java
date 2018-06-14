@@ -35,7 +35,7 @@ public class Alarm extends AppCompatActivity implements
         no_button = (Button) findViewById(R.id.no_button);
 
         prefs = getSharedPreferences("TheGuardianData", MODE_PRIVATE);
-        alarm = prefs.getString("alarm", (prefs.getString("name", "user")+" is in danger. Police was informed. "));
+        alarm = prefs.getString("alarm", (prefs.getString("name", "user") + " is in danger. Police was informed. "));
 
         increaseAlarm();
         unmuteAudio();
@@ -59,17 +59,22 @@ public class Alarm extends AppCompatActivity implements
 
 
     }
-    private void increaseAlarm(){
-        int i =0;
-        while(i<4){
-            alarm+=" ";
-            alarm+=alarm;
+
+    private void increaseAlarm() {
+        int i = 0;
+        while (i < 4) {
+            alarm += " ";
+            alarm += alarm;
             i++;
         }
     }
 
     private void stopAlarm() {
         alarmSituation = false;
+        if (tts != null) {
+            tts.stop();
+            tts.shutdown();
+        }
     }
 
     @Override
@@ -111,6 +116,15 @@ public class Alarm extends AppCompatActivity implements
     private void unmuteAudio() {
         audio = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         audio.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_UNMUTE, 1);
+        audio.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_RAISE, 1);
+        audio.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_RAISE, 1);
+        audio.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_RAISE, 1);
+        audio.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_RAISE, 1);
+        audio.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_UNMUTE, 1);
+        audio.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_RAISE, 1);
+        audio.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_RAISE, 1);
+        audio.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_RAISE, 1);
+
     }
 }
 
